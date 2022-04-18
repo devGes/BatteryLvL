@@ -1,21 +1,24 @@
-const { MongoClient } = require("mongodb");
+const express = require("express");
+const { MongoDBNamespace } = require("mongodb");
+const mongo = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
+const app = express();
  
 // // Atlas connection string         s                                                                                                                                
 // const url =  "mongodb+srv://cluster0.q70xs.mongodb.net/BatteryLvL";
 // const client = new MongoClient(url);
  
 //  // The database to use
- const dbName = "BatteryLvL";
 
+const clusterUrl = "cluster0.q70xs.mongodb.net";
 const username = encodeURIComponent("bambu_edu");
 const password = encodeURIComponent("sprocket");
-const clusterUrl = "cluster0.q70xs.mongodb.net/BatteryLVL";
+const dbName = "BatteryLvL";
 const authMechanism = "DEFAULT";
-// Replace the following with your MongoDB deployment's connection string.
 const uri =
-  `mongodb+srv://${username}:${password}@${clusterUrl}/?authMechanism=${authMechanism}`;
+  `mongodb+srv://${username}:${password}@${clusterUrl}/${dbName}/?authMechanism=${authMechanism}`;
 // Create a new MongoClient
-const client = new MongoClient(uri, {
+const client = new mongo(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
