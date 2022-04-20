@@ -1,6 +1,12 @@
 # Compiled class file
 *.class
 
+# env (login info)
+.env
+
+# Node modules
+/node_modules/
+
 # Log file
 *.log
 

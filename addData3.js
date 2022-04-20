@@ -12,7 +12,7 @@ const client = LVLfunctions.getClient();
 
 async function run() {
     try {
-         await client.connect();
+         
          console.log("Connected correctly to server");
          
          const db = client.db("BatteryLvL");
