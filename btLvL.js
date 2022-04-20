@@ -6,29 +6,39 @@ const Schema = mongoose.Schema;
 const express = require("express");
 const LVLfunctions = require("./LVLfunctions");
 
-  
-// Create a new MongoClient
-const client = LVLfunctions.getClient();
+
+// LVLfunctions.makeConnection();
 
 // database and collections
-db = client.db("BatteryLvL");
-users = db.collection("users");
-devices = db.collection("devices");
-deviceDataPoints = db.collection("deviceDataPoints");
+// client = LVLfunctions.getClient();
+// db = client.db("BatteryLvL");
+// users = db.collection("users");
+// devices = db.collection("devices");
+// deviceDataPoints = db.collection("deviceDataPoints");
 
 
 
 const app = express();
 app.use(express.json());
 
-app.post("/adduser", (req, res) => {
-  const firstName = req.body.firstname;
-  const lastName  = req.body.lastname;
+app.post("/adduser", async (req, res) => {
+  
+
+  // Create a new MongoClient
+  const client = await LVLfunctions.getClient();
+  await client.connect();
+  
+  db = client.db("BatteryLvL");
+  users = db.collection("users");
+
+  // console.log(req.body.dir);
+
+  const userName = req.body.userName;
   const email     = req.body.email;
-  const newUserID = Schema.newID;
+  console.log(userName, email);
 
   users.insertOne(
-    { firstName: firstName, lastName: lastName, email: email, userID: newUserID },
+    { userName: userName, email: email},
     (err, result) => {
       if (err) {
         console.error(err);
@@ -41,8 +51,16 @@ app.post("/adduser", (req, res) => {
   );
 });
 
-app.get("/users", (req, res) => {
+app.get("/users", async ( req, res) => {
+  // Create a new MongoClient
+  const client = await LVLfunctions.getClient();
+  await client.connect();
+  
+  db = client.db("BatteryLvL");
+  users = db.collection("users");
+
   users.find().toArray((err, items) => {
+
     if (err) {
       console.error(err);
       res.status(500).json({ err: err });

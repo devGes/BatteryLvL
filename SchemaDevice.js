@@ -4,13 +4,13 @@ import { model, Schema } from "mongoose";
 const deviceSchema = new Schema(
   {
     userID: { type: String, required: true , ref: "UserModel"},
-    deviceID: { type: String, required: true },
-    String: { type: String, required: true },
-    String: { type: String, required: true },
+    deviceLocation      : { type: String, required: true },
+    currentBatteryStart : { type: Date, required: true },
+    prevBatteryData     : { type: [[Date]] },
   },
   { versionKey: false, autoIndex: true }
 );
 
 
 
-export const BookModel = model("DeviceModel", deviceSchema);
+export const DeviceModel = model("DeviceModel", deviceSchema);

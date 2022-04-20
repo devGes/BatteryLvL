@@ -1,13 +1,9 @@
 const { MongoDBNamespace } = require("mongodb");
 const mongo = require("mongodb").MongoClient;
+require('dotenv').config()
 
-function getClient() {
+async function getClient() {
     //  // The database to use
-    const username = encodeURIComponent("bambu_edu");
-    const password = encodeURIComponent("sprocket");
-    const clusterUrl = "cluster0.q70xs.mongodb.net";
-    const dbName = "BatteryLvL";
-    const authMechanism = "DEFAULT";
     const uri = getURI();
     
     // Create a new MongoClient
@@ -16,17 +12,21 @@ function getClient() {
     useUnifiedTopology: true,
     });
 
-    makeConnection()
+    await makeConnection()
+    // await client.connect();
     return client;
 
 }
 
 function getURI() {
-    const username = encodeURIComponent("bambu_edu");
-    const password = encodeURIComponent("sprocket");
-    const clusterUrl = "cluster0.q70xs.mongodb.net";
-    const dbName = "BatteryLvL";
-    const authMechanism = "DEFAULT";
+    const username = process.env.LOGINNAME;
+    const password = process.env.PASSWORD;
+    const clusterUrl = process.env.CLUSTERURL;
+    const dbName = process.env.DBNAME;
+    const authMechanism = process.env.AUTHMECHANISM;
+
+
+
     const uri =
     `mongodb+srv://${username}:${password}@${clusterUrl}/${dbName}/?authMechanism=${authMechanism}`;
     return uri;

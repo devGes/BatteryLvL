@@ -1,0 +1,26 @@
+{
+  "name": "batterylvl2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "LVLfunctions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node btLvL.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devGes/BatteryLvL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devGes/BatteryLvL/issues"
+  },
+  "homepage": "https://github.com/devGes/BatteryLvL#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.0"
+  }
+}
