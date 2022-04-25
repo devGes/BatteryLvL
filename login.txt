@@ -1,4 +1,0 @@
-bambu_edu
-sprocket
-
-https://cloud.mongodb.com/
