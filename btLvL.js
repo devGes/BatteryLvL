@@ -1,6 +1,5 @@
 const express = require("express");
 const LVLfunctions = require("./LVLfunctions");
-require('dotenv').config()
 
 
 // // #Run once ... to add collections with schemas
@@ -12,5 +11,7 @@ app.use(express.json());
 
 // set API functionality
 LVLfunctions.setAPI(app);
+
+// Listen for requests
 app.listen(process.env.PORT, () => console.log("Server ready"));
 
