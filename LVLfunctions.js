@@ -33,7 +33,7 @@ async function setAPI(app) {
 
       console.log(found);
       res.status(200).json({
-        user: found
+        getAllUsers: found
       });
     } catch (e) {
       console.error(e);
@@ -57,7 +57,7 @@ async function setAPI(app) {
         return;
       }
       res.status(200).json({
-        result
+        deleteAllUsers: result
       });
     });
   });
@@ -141,7 +141,7 @@ async function setAPI(app) {
           }
           console.log(result);
           res.status(200).json({
-            ok: true
+            addUser: result
           });
         }
       );
@@ -170,7 +170,7 @@ async function setAPI(app) {
 
       console.log(found);
       res.status(200).json({
-        user: found
+        getUser: found
       });
     } catch (e) {
       console.error(e);
@@ -198,7 +198,7 @@ async function setAPI(app) {
         return;
       }
       res.status(200).json({
-        result
+        deleteUser: result
       });
     });
   });
@@ -222,7 +222,7 @@ async function setAPI(app) {
         return;
       }
       res.status(200).json({
-        result
+        editUser: result
       });
     });
   });
@@ -259,7 +259,7 @@ async function setAPI(app) {
 
         // only prints promise info, not user/device (it does update the DB)
         res.status(200).json({
-          newDoc
+          addDevice: newDoc
         });
         console.log(newDoc);
 
@@ -300,7 +300,7 @@ async function setAPI(app) {
       console.log(newDoc);
 
       res.status(200).json({
-        deleted: newDoc
+        deleteDevice: newDoc
       });
     } catch (e) {
       console.error(e);
@@ -326,7 +326,7 @@ async function setAPI(app) {
       const device = deviceList[device_id];
 
       res.status(200).json({
-        device: newDoc
+        getDevice: newDoc
       });
       console.log(device);
     } catch (e) {
@@ -374,7 +374,7 @@ async function setAPI(app) {
 
 
       res.status(200).json({
-        device: req.body
+        editDevice: result
       });
     } catch (e) {
       console.error(e);
@@ -452,7 +452,7 @@ async function setAPI(app) {
       const deviceList = newDoc.devices;
 
       res.status(200).json({
-        devices: deviceList
+        getAllDevices: deviceList
       });
       console.log(deviceList);
     } catch (e) {
@@ -478,7 +478,7 @@ async function setAPI(app) {
         }
       });
       res.status(200).json({
-        deleted: newDoc
+        deleteAllDevices: newDoc
       });
     } catch (e) {
       console.error(e);
@@ -526,7 +526,7 @@ async function setAPI(app) {
 
       // only prints promise info, not user/device (it does update the DB)
       res.status(200).json({
-        newDoc
+        addRecord: newDoc
       });
       console.log(newDoc);
 
@@ -569,7 +569,7 @@ async function setAPI(app) {
 
       // only prints promise info, not user/device (it does update the DB)
       res.status(200).json({
-        newDoc
+        deleteRecords: newDoc
       });
       console.log(newDoc);
 
