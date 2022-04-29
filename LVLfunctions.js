@@ -157,7 +157,7 @@ async function setAPI(app) {
 
   }); 
 
-  // Get User by ID 
+  // Get User by ID  
   app.get("/User/:userID", async (req, res) => {
     const good_id = new ObjectId(req.params.userID);
     console.log("Get User by ID:" + good_id);
