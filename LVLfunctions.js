@@ -21,7 +21,7 @@ async function setAPI(app) {
   app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -420,21 +420,23 @@ async function setAPI(app) {
       const deviceData = device.deviceData.toString().split(",");
       // console.log(deviceData);
 
-      dataLength = deviceData.length - 1; // -1 for fence/post
-      data_first = deviceData[0];
-      data_last = deviceData[dataLength-1];
-      // console.log("data_last", data_last);
-      dataDiff = data_last - data_first;
-      // console.log("aaa", dataLength, dataDiff);
-      dataAVG = dataDiff/dataLength;
-      // console.log("dataAVG", dataAVG);
 
-      dateLast = new Date(parseInt(data_last));
-      // console.log("dateLast", dateLast);
+      dateEOL = calculateEOL(deviceData);
+      // dataLength = deviceData.length - 1; // -1 for fence/post
+      // data_first = deviceData[0];
+      // data_last = deviceData[dataLength-1];
+      // // console.log("data_last", data_last);
+      // dataDiff = data_last - data_first;
+      // // console.log("aaa", dataLength, dataDiff);
+      // dataAVG = dataDiff/dataLength;
+      // // console.log("dataAVG", dataAVG);
+
+      // dateLast = new Date(parseInt(data_last));
+      // // console.log("dateLast", dateLast);
       
-      dateEOL = new Date(dateLast + dataAVG);
-      dateEOLstring = dateEOL.toString();
-      // console.log("bbb", dateEOLstring, dateEOL);
+      // dateEOL = new Date(dateLast + dataAVG);
+      // dateEOLstring = dateEOL.toString();
+      // // console.log("bbb", dateEOLstring, dateEOL);
 
 
 
@@ -614,7 +616,7 @@ async function setAPI(app) {
 
 }
 
-async function getClient() {
+async function getClient() {  
   //  // The database to use
   const uri = getURI();
 
@@ -716,7 +718,7 @@ function validateDevice(device) {
   return true;
 
 
-}
+} 
 
 async function addSchemas() {
 
@@ -733,7 +735,7 @@ async function addSchemas() {
 
       if (collection.find(x => x.name === process.env.COLLECTION)) {
         // console.log(`Collection (${process.env.COLLECTION}) already exists.`);
-      } else {
+      } else { 
         console.log("Collection doesn't exit, creating new...");
 
         db.createCollection("users", {
@@ -783,6 +785,35 @@ async function addSchemas() {
   }
 }
 
+function calculateEOL(deviceData) {
+  dataLength = deviceData.length - 1; // -1 for fence/post
+
+  if (dataLength <2) {
+    return 'Not enough data for calculation'
+  }
+
+  data_first = deviceData[0];
+  data_last = deviceData[dataLength-1];
+  // console.log("data_last", data_last);
+
+  if (data_first != data_first.sort()) {
+    console.log('Data out of order *** ERROR')
+  }
+
+  
+  dataDiff = data_last - data_first;
+  // console.log("aaa", dataLength, dataDiff);
+  dataAVG = dataDiff/dataLength;
+  // console.log("dataAVG", dataAVG);
+
+  dateLast = new Date(parseInt(data_last));
+  // console.log("dateLast", dateLast);
+  
+  dateEOL = new Date(dateLast + dataAVG);
+  dateEOLstring = dateEOL.toString();
+  // console.log("bbb", dateEOLstring, dateEOL);
+  return dateEOLstring
+}
 
 module.exports = {
   getClient,
@@ -791,5 +822,6 @@ module.exports = {
   validateUser,
   addSchemas,
   setAPI,
-  getDBCollection
+  getDBCollection,
+  calculateEOL
 };

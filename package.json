@@ -4,9 +4,7 @@
   "description": "",
   "main": "LVLfunctions.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
-    "start:dev": "DEBUG=btLvL:*& nodemon ./bin/www"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -23,10 +21,13 @@
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "mongodb": "^4.5.0",
-    "mongoose": "^6.3.0",
+    "mongoose": "^6.3.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0"
   }
 }
